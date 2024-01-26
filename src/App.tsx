@@ -8,9 +8,10 @@ function App() {
         <header className="App-header">
           <h1>Welcome to Web Dev CS5610 - 07 Spring 2024</h1>
           <ul>
-            <li><a href="https://github.com/jhanyu2019/kanbas-ract-web-app/tree/main/public/labs/a1">Assignment 1</a></li>
-            <li><a href="https://github.com/jhanyu2019/kanbas-ract-web-app/tree/main/public/labs/Kanbas">Kanbas Course Home</a></li>
+            <li><a href="https://main--thriving-gumdrop-9d2290.netlify.app/labs/a1/">Assignment 1</a></li>
+            <li><a href="https://main--thriving-gumdrop-9d2290.netlify.app/labs/kanbas/courses/home/screen">Kanbas Course Home</a></li>
           </ul>
+
         </header>
       </div>
   );

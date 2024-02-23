@@ -48,7 +48,7 @@ const Breadcrumb = () => {
             );
         });
     };
-    // Breadcrumb components
+
     const breadcrumbs = createBreadcrumbLinks(pathnames);
 
     return (

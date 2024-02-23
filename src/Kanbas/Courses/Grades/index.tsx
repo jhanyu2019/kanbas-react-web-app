@@ -94,10 +94,10 @@ function Grades() {
                         return (
                             <tr key={enrollment._id}>
                                 <td>{user?.firstName} {user?.lastName}</td>
-                                {as.map((assignment) => {  // Change this line to iterate over 'as' instead of 'assignments'
+                                {as.map((assignment) => {
                                     const grade = grades.find(
                                         (grade) => grade.student === enrollment.user && grade.assignment === assignment._id);
-                                    return (<td key={assignment._id}>{grade?.grade || "N/A"}</td>);  // Add a 'key' prop here for optimization
+                                    return (<td key={assignment._id}>{grade?.grade || "N/A"}</td>);
                                 })}
                             </tr>);
                     })}

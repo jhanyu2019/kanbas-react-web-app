@@ -10,7 +10,7 @@ import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import Breadcrumb from './Breadcrumb';
 
-function Courses() {
+function Courses({ courses }: { courses: any[]; }) {
     const { courseId, assignmentId } = useParams();
     const course = courses.find((course) => course._id === courseId);
 

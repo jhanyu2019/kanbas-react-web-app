@@ -1,16 +1,12 @@
 import React , { useState, useEffect }from "react";
 import "./index.css";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { assignments } from "../../../Database";
 import { FaCheckCircle, FaEllipsisV } from "react-icons/fa";
 import { addAssignment, updateAssignment, selectAssignment } from '../assignmentsReducer';
-
 import {useDispatch, useSelector} from 'react-redux';
 import {KanbasState} from "../../../store";
-import {findModulesForCourse} from "../../Modules/client";
-import {setModules} from "../../Modules/reducer";
 import * as client from "./../client";
-import { findAssignmentsForCourse, createAssignment } from "./../client";
+
 
 
 function AssignmentEditor() {
@@ -84,24 +80,21 @@ function AssignmentEditor() {
     const handleSave = async () => {
         console.log('Save button clicked');
         try {
-            // Check if we are updating an existing assignment
             if (selectedAssignment) {
                 const updatedAssignment = await client.updateAssignment({ ...assignment, course: courseId! });
                 dispatch(updateAssignment(updatedAssignment));
             } else {
-                // We are adding a new assignment
                 const newAssignment = {
                     ...assignment,
                     _id: new Date().getTime().toString(),
                     course: courseId!,
                 };
                 const addedAssignment = await client.createAssignment(courseId, newAssignment);
-                dispatch(addAssignment(addedAssignment)); // Add to state with the response
+                dispatch(addAssignment(addedAssignment));
             }
             navigate(`/Kanbas/Courses/${courseId}/Assignments`);
         } catch (error) {
             console.error('Error saving assignment:', error);
-            // Handle the error (e.g., show error message to the user)
         }
     };
 

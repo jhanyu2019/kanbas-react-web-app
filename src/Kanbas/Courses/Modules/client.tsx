@@ -1,5 +1,9 @@
 import axios from "axios";
-const COURSES_API = "http://localhost:4000/api/courses";
+
+const API_BASE = process.env.REACT_APP_API_BASE;
+const COURSES_API = `${API_BASE}/api/courses`;
+const MODULES_API = `${API_BASE}/api/modules`;
+
 
 interface Module {
 
@@ -10,7 +14,6 @@ interface Module {
     lesson: [];
 }
 
-const MODULES_API = "http://localhost:4000/api/modules";
 
 export const updateModule = async (module: Module) => {
     const response = await axios.

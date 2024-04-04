@@ -4,7 +4,6 @@ import KanbasNavigation from "./Navigation";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Courses from "./Courses";
-import { courses as initialCourses } from "./Database";
 import store from "./store";
 import { Provider } from "react-redux";
 
@@ -12,7 +11,8 @@ import { Provider } from "react-redux";
 
 function Kanbas() {
     const [courses, setCourses] = useState<any[]>([]);
-    const COURSES_API = "http://localhost:4000/api/courses";
+    const API_BASE = process.env.REACT_APP_API_BASE;
+    const COURSES_API =  `${API_BASE}/api/courses`;
     const [course, setCourse] = useState({
         _id: "1234", name: "New Course", number: "New Number",
         startDate: "2023-09-10", endDate: "2023-12-15",

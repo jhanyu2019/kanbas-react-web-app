@@ -27,10 +27,10 @@ function Dashboard({ courses, course, setCourse, addNewCourse, deleteCourse, upd
                    onChange={(e) => setCourse({ ...course, endDate: e.target.value }) } />
 
 
-            <button onClick={addNewCourse} >
+            <button className="btn-add" onClick={addNewCourse} >
                 Add
             </button>
-            <button onClick={updateCourse} style={{ marginLeft: '5px' }} >
+            <button className="btn-update" onClick={updateCourse} style={{ marginLeft: '5px' }} >
                 Update
             </button>
 
@@ -48,14 +48,14 @@ function Dashboard({ courses, course, setCourse, addNewCourse, deleteCourse, upd
                                           style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}>
                                         {course.name}
                                         <div className="card-actions">
-                                        <button onClick={(event) => {
+                                        <button className="btn-edit" onClick={(event) => {
                                             event.preventDefault();
                                             setCourse(course);
                                         }} >
                                             Edit
                                         </button>
 
-                                        <button onClick={(event) => {
+                                        <button className="btn-delete" onClick={(event) => {
                                             event.preventDefault();
                                             deleteCourse(course._id);
                                         }} style={{ marginLeft: '5px' }}>

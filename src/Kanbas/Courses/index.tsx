@@ -1,4 +1,4 @@
-import { courses } from "../Database";
+
 import "./index.css";
 import { Navigate, Route, Routes, useLocation, useParams, Link } from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
@@ -9,10 +9,24 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import Breadcrumb from './Breadcrumb';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Courses({ courses }: { courses: any[]; }) {
     const { courseId, assignmentId } = useParams();
-    const course = courses.find((course) => course._id === courseId);
+    const COURSES_API = "http://localhost:4000/api/courses";
+    const [course, setCourse] = useState<any>({ _id: "" });
+    const findCourseById = async (courseId?: string) => {
+        const response = await axios.get(
+            `${COURSES_API}/${courseId}`
+        );
+        setCourse(response.data);
+    };
+
+    useEffect(() => {
+        findCourseById(courseId);
+    }, [courseId]);
+
 
     return (
         <div className="d-block">

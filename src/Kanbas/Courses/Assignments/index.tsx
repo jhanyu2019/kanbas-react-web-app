@@ -1,33 +1,49 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './index.css';
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle } from "react-icons/fa";
 import {useNavigate, Link, useParams } from "react-router-dom";
-import { assignments } from "../../Database";
 import {useDispatch, useSelector} from "react-redux";
 import { KanbasState } from "../../store";
 import {
-    addAssignment, deleteAssignment,updateAssignment,selectAssignment
+    addAssignment,updateAssignment,deleteAssignment, setAssignments
 } from "./assignmentsReducer";
-
+import axios from "axios";
+import * as client from "./client";
+import { findAssignmentsForCourse, createAssignment } from "./client";
 
 function Assignments() {
     const { courseId } = useParams();
     const dispatch = useDispatch();
 
-
+    console.log("Before useSelector");
     const assignmentsList = useSelector((state: KanbasState) =>
         state.assignmentsReducer.assignments.filter((assignment) => assignment.course === courseId));
+    console.log("After useSelector", assignmentsList);
+
+
     const navigate = useNavigate();
-    const handleAddAssignment = () => {
+    const handleAddAssignment = async() => {
         navigate(`/Kanbas/Courses/${courseId}/Assignments/new`);
     };
 
-    const handleDelete = (assignmentId: string) => {
+    const handleDelete = async (assignmentId: string) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this assignment?");
         if (confirmDelete) {
-            dispatch(deleteAssignment(assignmentId));
+            try {
+                await client.deleteAssignment(assignmentId);
+                dispatch(deleteAssignment(assignmentId));
+            } catch (error) {
+                alert("Failed to delete assignment. Please try again.");
+            }
         }
     };
+
+
+    useEffect(() => {
+        findAssignmentsForCourse(courseId)
+            .then(assignments =>
+        dispatch(setAssignments(assignments)));
+        }, [courseId]);
 
 
 
